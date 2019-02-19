@@ -1,0 +1,12 @@
+centroCusto;nomeAprovador;tipoProcesso;valorLimite
+1;ancelmo.matheus15;Pagamento;100
+2;JOAOGS;Pagamento;500
+3;MARIASN;Pagamento;1000
+4;JOSEOB;Vale;100
+5;THIAGOVL;Vale;500
+1;RENANNB;Vale;1000
+2;ancelmo.matheus15;AcertoDespesa;1000
+3;JOAOGS;AcertoDespesa;500
+4;MARIASN;Pagamento;1000
+5;JOSEOB;AcertoDespesa;100
+4;RENANNB;Pagamento;500

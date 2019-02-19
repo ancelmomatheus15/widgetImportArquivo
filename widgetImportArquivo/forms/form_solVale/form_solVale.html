@@ -1,0 +1,124 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="fluig-style-guide">
+<form name="form" role="form">
+
+	<div class="col-sm-12 col-md-4">
+		
+		<label for="zoomCCusto">Centro de Custo:</label>
+		<input type="zoom" class="form-control" name="txtCentroCusto" id="txtCentroCusto"
+			data-zoom="{'displayKey' : 'CCArea',
+					    'datasetId' : 'ds_centroDeCusto',
+					    'fields' : [{'field':'CCCod','label':'Código'},
+					  			    {'field':'CCArea','label':'Descrição', 'standard' : 'true', 'search' : 'true'}]}"
+		/>
+		
+	</div>
+
+	<div class="row col-sm-12 col-md-4">
+		
+		<label for="txtValor">Valor do Vale:</label>
+		<input type="text" class="form-control" name="txtValor" id="txtValor"/>
+
+	</div>
+
+	<div class="row col-sm-12 col-md-8">
+		
+		<label for="txtAprovador">O aprovador definido é:</label>
+		<input type="text" class="form-control" name="txtAprovador" id="txtAprovador" readonly="true" />
+
+	</div>
+
+	<div>
+		<input type="button" onclick="buscarAprovador();" class="btn btn-primary" id="btnBusca" name="btnBusca"  value="Buscar Aprovador" />	
+	</div>
+
+
+</form>
+</div>
+</body>
+
+
+<script src="/webdesk/vcXMLRPC.js"></script>
+<script type="text/javascript" >
+
+	var areaAprov = "";
+
+	var valorSolicitacao = "";
+
+	var CCusto = "";
+
+
+	$(document).init(function () {
+
+		areaAprov = "Vale";
+
+	});
+
+
+	function buscarAprovador(){
+
+		var constr = [];
+
+		//valorSolicitacao = document.getElementById("txtValor").value;
+		//valorSolicitacao = Number(valorSolicitacao);
+
+//		valorSolicitacao = valorSolicitacao.replace(/[^0-9]+/g, "");
+//		valorSolicitacao = valorSolicitacao.replace(/[^0-9]+/g, "");
+
+
+//		Math.round(valorSolicitacao);
+
+//		valorSolicitacao.replace(",00", "");
+//		valorSolicitacao.replace(".00", "");
+
+
+//		if((valorSolicitacao.match(/,00/g).length) == 1) {
+	
+//			valorSolicitacao.replace(",00", "")
+//		}else if((valorSolicitacao.match(/.00/g).length) == 1){
+
+//			valorSolicitacao.replace(".00", "")
+//		}
+
+
+		//contraints para buscar o dataset
+
+		//var c1 = DatasetFactory.createConstraint("centroCusto", CCusto, CCusto, ConstraintType.MUST);
+		//var c2 = DatasetFactory.createConstraint("tipoProcesso", areaAprov, areaAprov, ConstraintType.MUST);
+		var c3 = DatasetFactory.createConstraint("valorLimite", "100", "100", ConstraintType.MUST);
+	
+		//constr.push(c1);
+		//constr.push(c2);
+		constr.push(c3);
+
+
+
+
+		var aprovador = DatasetFactory.getDataset("ds_aprovXCC", null, constr, null); //Busca o dataset de relação entre aprovador x Centro de Custo
+
+
+		document.getElementById('txtAprovador').value = '';
+
+
+
+	}
+
+
+	function setSelectedZoomItem(selectedItem) {
+
+    	CCusto = selectedItem.CCCod;
+	}
+
+
+
+
+</script> 
+</html>
